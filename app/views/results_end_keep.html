@@ -1,0 +1,89 @@
+<body>
+ <script src="./../scripts/ImportData.js"></script>
+ <script src="bower_components/d3/d3.js"></script>
+ <script src="bower_components/TinyColor/TinyColor.js"></script>
+ <script src="bower_components/saveSvgAsPng/src/saveSvgAsPng.js"></script>
+ <p>
+ <div id="menubar1">
+ <div class="selectdiv PlotSize"></div>
+ <div class="selectdiv ColorMapSelector"></div>
+
+ <button id="ShowNames" value="false" onclick="shownames()">Show IDs</button>
+ <button id='ShowParents' value = "false" onclick="showparents()">Parents IDs</button>
+ <button id='SaveButton' value = "false" onclick="ExportLayersToPNG()">Export to PNG</button>
+
+ </div>
+ <div id="menubar2">
+ <div class="selectdiv HighlightStyle"></div>
+ <button id='PosVals' value = "false" onclick="showposvals()">Positive</button>
+ <button id='NegVals' value = "false" onclick="shownegvals()">Negative</button>
+  Threshold: <input type="number" step="0.5" value="0" id="threshold"></div>
+  </div>
+
+ <div id="layerselectionbar">
+ <div class="LayersButtons">Select a layer : <br/></div>
+ </div>
+
+ <div id="plots"></div>
+
+ </p>
+ <script>
+  //console.log(d3.select("body").node().getBoundingClientRect());
+//  	var Datasets =  angular.element(document.querySelector('[ng-controller="vm"]')).scope().Datasets;
+
+
+  	console.log(Datasets);
+
+
+    var margin = {top: 45, right: 45, bottom: 45, left: 45};
+
+    var width = 450 - margin.left - margin.right,
+        height = 450 - margin.top - margin.bottom;
+
+    var tooltip = d3.select("body")   //Initialize tooltip
+      .append("div")
+      .attr('class', 'tooltip');
+
+
+    var scaleX,
+        scaleY;
+
+
+    var THRESHOLD = 0.0;
+
+
+    var IDIndex = {};
+
+    var NbLayers = Object.keys(Datasets[Object.keys(Datasets)[0]]).length // nb of layers in the 1st dataset
+    var LayersNames = Object.keys(Datasets[Object.keys(Datasets)[0]]);   /*Retrieve names of Voronoi Layers (characters)*/
+    var CurrentLayer = LayersNames[0];
+    var CurrentCell = {"ID": null, "Layer": null, "Color": null, "TxtColor": null, "BoxColor": null};
+    var ColorPalette = [];
+    var CurrentPalette;
+    var BorderColor,
+        txtcolor;      
+
+    BuildColorPalette("Viridis");
+    LayerSelectionButtons();                 // Add a selection box to the current plot
+    //ExportLayersToPNG();
+    ColorSelection();
+    SizeSelection();
+    HighlightStyleSelection();
+    DrawAllLayers();                         // Calculate all layers
+
+
+    //console.log(IDIndex);
+ 
+
+
+
+    d3.select("#threshold").on("input", function() {
+        THRESHOLD = +this.value;
+        ChangeColorMap();
+    });
+
+
+
+</script>
+ </body>
+</br></br>

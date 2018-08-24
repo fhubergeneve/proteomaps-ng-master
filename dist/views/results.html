@@ -1,0 +1,20 @@
+<!--
+/************************ LICENCE ***************************
+*     This file is part of <ViKM Vital-IT Knowledge Management web application>
+*     Copyright (C) <2016> SIB Swiss Institute of Bioinformatics
+*
+*     This program is free software: you can redistribute it and/or modify
+*     it under the terms of the GNU Affero General Public License as
+*     published by the Free Software Foundation, either version 3 of the
+*     License, or (at your option) any later version.
+*
+*     This program is distributed in the hope that it will be useful,
+*     but WITHOUT ANY WARRANTY; without even the implied warranty of
+*     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*     GNU Affero General Public License for more details.
+*
+*     You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>
+*
+*****************************************************************/
+--> <div class="container"> <div class="row"> <div class="col-sm-6 col-sm-offset-3"> <div class="panel panel-default" style="margin-top: 50px"> <div class="panel-heading"> <div class="panel-title">Load results</div> </div> <div class="panel-body"> <form name="form" ng-submit="vm.sendToBackend()" role="form" class="form-horizontal"> <div class="form-group input-group-sm" ng-class="{ 'has-error': form.result_id.$dirty && form.result_id.$error.required }"> <label class="control-label col-sm-2" for="result_id">Result ID</label> <div class="col-sm-6"><input type="text" name="result_id" id="result_id" class="form-control" ng-model="vm.resultId" minlength="13" maxlength="13" required></div> <div class="col-sm-4"> <div class="form-actions col-sm-9 col-sm-offset-3"> <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Load</button> </div> </div> </div> </form> </div> </div> </div> </div> <div class="row" ng-if="vm.motifData"> <div class="col-sm-2"> <button ng-click="vm.downloadZip()" class="btn btn-primary" style="margin-top: 16px"><span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download results as ZIP</button> </div> </div> <br> <div class="row" ng-if="vm.motifData"> <ul class="nav nav-tabs"> <li role="presentation" class="x-mer-tab" ng-repeat="xMer in vm.xMers" ng-class="(vm.selXMer == xMer) ? 'active' : undefined"> <a ng-click="vm.selectXMer(xMer)">{{xMer}}-mers</a> </li> <li role="presentation" class="x-mer-tab" ng-class="vm.showLengthDistribution ? 'active' : undefined"> <a ng-click="vm.showLengthDistributionFunc()">Length distributions</a> </li> </ul> </div> <div class="row" ng-if="vm.selXMer"> <div class="col-sm-3"> <h2>Peptides {{vm.selXMer}}-mers</h2> </div> </div> <div class="row" ng-if="vm.showLengthDistribution"> <div class="col-sm-1"> <h2>Length distribution</h2> </div> </div> <div ng-repeat="(nrMotifs, motifGroup) in (vm.selXMer ? vm.motifData : vm.lengthDistData)"> <div class="row"> <h3>{{nrMotifs + ' motif' + ((nrMotifs != '1')?'s':'')}}</h3> </div> <div ng-repeat="lineData in motifGroup.motifs"> <div class="row"> <div class="col-sm-3" ng-repeat="logoInfo in lineData"> <img ng-src="{{logoInfo.imgURL}}" style="width:100%"> </div> </div> <div class="row"> <div class="col-sm-3 logo-info-text" ng-repeat="logoInfo in lineData"> <span>{{logoInfo.id}} - {{logoInfo.nr_peptides}} ({{logoInfo.PMW.toFixed(3)}})</span> </div> </div> </div> <hr> </div> </div>

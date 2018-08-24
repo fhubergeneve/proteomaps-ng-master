@@ -1,0 +1,37 @@
+<!--
+/************************ LICENCE ***************************
+*     This file is part of <ViKM Vital-IT Knowledge Management web application>
+*     Copyright (C) <2016> SIB Swiss Institute of Bioinformatics
+*
+*     This program is free software: you can redistribute it and/or modify
+*     it under the terms of the GNU Affero General Public License as
+*     published by the Free Software Foundation, either version 3 of the
+*     License, or (at your option) any later version.
+*
+*     This program is distributed in the hope that it will be useful,
+*     but WITHOUT ANY WARRANTY; without even the implied warranty of
+*     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*     GNU Affero General Public License for more details.
+*
+*     You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>
+*
+*****************************************************************/
+--> <div class="container"> <div class="text-center"> <h2>Submit peptide sequences to {{vm.siteTitle}}</h2> </div> <div class="row"> <div class="col-sm-6 col-sm-offset-3"> <div class="panel panel-default" style="margin-top: 50px"> <div class="panel-body"> <form name="form" ng-submit="vm.sendToBackend()" role="form" novalidate class="form-horizontal" role="form"> <div class="form-group"> <label class="control-label col-sm-3">FASTA file <span class="glyphicon glyphicon-info-sign info-help" aria-hidden="true" style="color:dodgerblue" data-toggle="modal" data-target="#fastaHelpModal"></span></label> <div class="col-sm-9" style="margin-top: 7px"> <!--	<input type="file" id="fastafile" name="fastafile" ngf-select="vm.uploadFile($file)" /> --> <input type="file" style="display:none" id="fastafile" name="fastafile" ngf-select="vm.uploadFile($file)"> <button type="button" class="btn btn-default btn-xs" ng-click="vm.clickBrowse()">Choose file</button> <span id="selected_filename">{{vm.selectedFileName}}</span> </div> </div> <div class="form-group input-group-sm"> <label class="control-label col-sm-3" for="pep_seqs">Peptide sequences <button type="button" class="btn btn-default btn-xs" ng-click="vm.insertSamplePeptides()">sample data</button></label> <div class="col-sm-2"><textarea name="pep_seqs" id="pep_seqs" rows="6" cols="50" ng-model="vm.pepSeqs"></textarea></div> </div> <div class="form-group input-group-sm" ng-class="{ 'has-error': form.nr_motifs.$dirty && form.nr_motifs.$error.required }"> <label class="control-label col-sm-3" for="nr_motifs">Max nr of motifs</label> <div class="col-sm-2"><input type="number" name="nr_motifs" id="nr_motifs" class="form-control" min="1" step="1" ng-model="vm.nr_motifs" required></div> <div class="col-sm-6"><span ng-show="form.nr_motifs.$dirty && form.nr_motifs.$error.required" class="help-block">Number of motifs is required</span></div> </div> <div class="form-group input-group-sm" ng-class="{ 'has-error': form.core_length.$dirty && form.core_length.$error.required }"> <label class="control-label col-sm-3" for="nr_motifs">Core length</label> <div class="col-sm-2"> <input type="number" name="core_length" id="core_length" class="form-control" min="1" step="1" ng-model="vm.core_length" required> </div> <div class="col-sm-6"> <span ng-show="form.core_length.$dirty && form.core_length.$error.required" class="help-block">Core length is required</span> </div> </div> <div class="form-group input-group-sm"> <label class="control-label col-sm-3" for="use-trash">Trash</label> <div class="col-sm-2"> <input type="checkbox" id="use-trash" ng-model="vm.use_trash" ng-change="vm.changeUseTrash()"> </div> </div> <div class="form-actions col-sm-9 col-sm-offset-3"> <button type="submit" ng-disabled="form.$invalid || !(vm.fileData || vm.pepSeqs) " class="btn btn-primary">Submit</button> </div> </form> </div> </div> </div> </div> </div> <!-- Modal --> <div class="modal fade" id="fastaHelpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> <h4 class="modal-title" id="myModalLabel">FASTA file format</h4> </div> <div class="modal-body"> Data can be uploaded in a FASTA format. Please make sure that the peptides are all of same length. <pre>
+>0
+AAAGITRNV
+>1
+AAANPTLAF
+>2
+AAANVVRNI
+>3
+AAAVLSHNR
+>4
+AAFGEERRL
+>5
+AAFREPRLL
+>6
+AAKAGARKV
+>7
+AALTVHQAR
+				</pre> You can download a sample FASTA file or make a submission using this sample data. </div> <div class="modal-footer"> <button type="button" class="btn btn-primary" ng-click="vm.downloadSampleFasta()"><span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download sample data</button> <button type="button" class="btn btn-primary" ng-click="vm.submitSampleFasta()" data-dismiss="modal"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload FASTA test file</button> </div> </div> </div> </div>

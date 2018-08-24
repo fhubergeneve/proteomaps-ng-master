@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>ViKM documentation+Rserve</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">ViKM - Vital-IT Knowledge Management</h1>
+
+<h2 id="toc_1">About</h2>
+
+<p>Most projects and facilities need a data management system to organise, analyse, visualise and share data. Common to all usage scenarios are the needs to handle file organisation into datasets, grouping of datasets into projects and manage file access permission, involving user account management, organisation of users into groups and setting access rights. These functionalities have been integrated in the ViKM system to enable the very quick deployment and customization of a secured data sharing system for any new project or research facilities. ViKM is in production to manage data for tens of research projects, from single lab project to multi-partner European projects. It is also at the heart of OncoBench, an NGS and LIMS bioinformatics pipeline installed at the molecular pathology lab of the Geneva Hospitals. For each of these installations, specific mining and visualisation modules have been integrated to the base ViKM system.</p>
+
+<p>This document will describe the installation and usage of the base ViKM system. Examples of visualization modules and integration with R are also described.</p>
+
+<h2 id="toc_2">Installation</h2>
+
+<p>The ViKM application is web-based and is composed of two parts: a server part and a browser front-end.</p>
+
+<p>The server side back-end is a RESTful application written in PHP with the SLIM framework. It is connected to a database using the Medoo framework. This solution enables to choose between different relational database systems. By default, ViKM comes with a SQLite database, but a dump script to use MySQL is also provided. It should be possible to easily link ViKM to other RDBMS, like Oracle or PostgeSQL.</p>
+
+<p>The web side is a JavaScript web application written with the AngularJS, Rectangular and Bootstrap frameworks.</p>
+
+<p>The source code of both parts is versioned using GIT and hosted in the SIB Swiss Institute of Bioinformatics GitLab server.</p>
+
+<h3 id="toc_3">Backend</h3>
+
+<blockquote>
+<p><em>Prerequisite: The server should have a web server (the system has been tested with Apache) with PHP &gt;=5.6 and the PHP-PDO module installed.</em></p>
+</blockquote>
+
+<p>The SIB GitLab repository of the ViKM back-end is: <code>git://gitlab.isb-sib.ch/wikmgroup/vikmapp-backend.git</code></p>
+
+<p>To install it: 
+<code>bash
+mkdir -p vikm;
+cd vikm;
+git clone git@gitlab.isb-sib.ch:wikmgroup/vikmapp-backend.git
+</code></p>
+
+<p>From now on the path of the newly created <code>vikm</code> folder will be  referred as:<code>&lt;path-to-vikm-root&gt;</code>-</p>
+
+<p>The cloning create a <code>vikmapp-backend</code> directory which contains for directories:</p>
+
+<ul>
+<li>  <strong>conf:</strong> contains the configuration file config.php</li>
+<li>  <strong>data:</strong> contains the sqlite3 database (database.sqlite) and a MySQL dump script (vikm.sql)</li>
+<li>  <strong>htdocs:</strong> contains the server side scripts. The PHP library dependencies are managed with Composer. The libraries are in the <code>vendor</code> folder whereas the scripts are in the <code>api</code> folder.</li>
+<li>  <strong>tools:</strong> contains two files: <code>db.inc.php</code> host the initialisation of the database connection. <code>include.php</code> contains generic functions.</li>
+</ul>
+
+<p>Ideally, one has to create a web server virtual host pointing to the htdocs directory as a document root. For security reasons, the <code>conf</code>, <code>data</code> and <code>tools</code> directories  must sit outside of the document root of the web server.</p>
+
+<p>A tutorial to create a Virtual host is available: <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-ubuntu-14-04-lts">https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-ubuntu-14-04-lts</a></p>
+
+<p>In order to setup the system, one has to edit the <code>conf/config.php</code> file to match the server configuration.</p>
+
+<div><pre><code class="language-php">&lt;?php
+// A random string used to crypt user password //
+if(!defined(&#39;SALT&#39;)) define(&#39;SALT&#39;,&#39;O06i44wKq5Kjt.&#39;);
+
+// The email address of the ViKM administrator
+if(!defined(&quot;CONTACT_EMAIL&quot;)) define(&quot;CONTACT_EMAIL&quot;,&quot;first.last@email.com&quot;);
+
+// The name of the ViKM instance
+if(!defined(&quot;SITE_TITLE&quot;)) define(&quot;SITE_TITLE&quot;,&quot;ViKM APP&quot;);
+
+// Path to the data directory. All datasets will be stored in this directory. 
+// This directory must be writable by the apache user.
+if(!defined(&#39;DATA_PATH&#39;)) define(&#39;DATA_PATH&#39;,__DIR__.&quot;/../data&quot;);
+
+// The type of RDBMS to use. Supported values: sqlite, mysql
+if(!defined(&quot;DBTYPE&quot;)) define(&quot;DBTYPE&quot;,&quot;sqlite&quot;);
+
+// For MySQL connection
+// if(!defined(&quot;DBBASE&quot;)) define(&quot;DBBASE&quot;,&quot;mysql_database&quot;);
+// if(!defined(&quot;DBSERVER&quot;)) define(&quot;DBSERVER&quot;,&quot;mysql_server&quot;);
+// if(!defined(&quot;DBNAME&quot;)) define(&quot;DBNAME&quot;,&quot;mysql_username&quot;);
+// if(!defined(&quot;DBPWD&quot;)) define(&quot;DBPWD&quot;,&quot;mysql_user_password&quot;);
+
+
+// For Sqlite3 connection. Path to the DB file
+if(!defined(&quot;DBFILE&quot;)) define(&quot;DBFILE&quot;,DATA_PATH.&quot;/database.sqlite&quot;);
+
+
+// Path to the tools directory
+
+if(!defined(&#39;INCLUDE_PATH&#39;)) define(&quot;INCLUDE_PATH&quot;,dirname(__FILE__).&quot;/../tools/&quot;);
+
+
+// Whether to server should accept Cross-Origin request or not. Should be set to false in production.
+if(!defined(&#39;CORS&#39;)) define(&#39;CORS&#39;,true);
+
+// Set the debug state of the application. Might be used to display some debugging messages
+if(!defined(&#39;DEBUG&#39;)) define(&#39;DEBUG&#39;,false);
+?&gt;</code></pre></div>
+
+<p>If ViKM is used with a MySQL database, one has to change the DBTYPE value and un-comment the part related to MySQL connection.</p>
+
+<p><strong>IMPORTANT:</strong> be sure that the DATA_PATH is writable by the web server (apache) user.</p>
+
+<p>The database connections are managed by <a href="http://medoo.in/">Medoo framework</a>. This framework supports various SQL databases. However, in case of usage with MySQL, we recommend the usage of <a href="http://www.meekro.com">Meekro</a> which offers an easier interface and supports advanced MySQL specific features. ViKM uses the Composer package manager to handle the dependencies.</p>
+
+<p>ViKM uses the <a href="http://www.slimframework.com/">SLIM PHP Framework (version 2)</a> to handle the routing of the RESTful application.</p>
+
+<p>To get the required external libraries: </p>
+
+<div><pre><code class="language-bash">cd &lt;path-to-vikm-root&gt;/vikm-backend/htdocs;
+php composer.phar update;</code></pre></div>
+
+<h2 id="toc_4">Frontend</h2>
+
+<blockquote>
+<p><em>prerequisite: The ViKM frontend is developed with the following technologies:</em></p>
+
+<ul>
+<li><a href="https://nodejs.org">NodeJS</a> JavaScript runtime</li>
+<li><a href="https://bower.io">Bower</a> package manager</li>
+<li><p><a href="http://gruntjs.com">Grunt</a> task runner</p>
+
+<p>Make sure to have all these components installed on your system in order to deploy the web application._</p></li>
+</ul>
+</blockquote>
+
+<p>The SIB GitLab repository of ViKM frontend is: <code>git://gitlab.isb-sib.ch/wikmgroup/vikmapp-ng.git</code></p>
+
+<p>To install it: 
+<code>bash
+cd &lt;path-to-vikm-root&gt;;
+git clone git@gitlab.isb-sib.ch:wikmgroup/vikmapp-ng.git
+</code></p>
+
+<p>Once this directory cloned, the necessary Node modules and bower components must be installed. </p>
+
+<div><pre><code class="language-bash">cd &lt;path-to-vikm-root&gt;/vikmapp-ng/;
+npm install;
+bower install;</code></pre></div>
+
+<p>This will install modules in two folders;<code>node_modules</code> and <code>bower components</code>.
+The html, JavaScript and css files of the application are in the <code>app</code> folder.</p>
+
+<p>The development and deployment of the front-end is managed by Grunt. The included Gruntfile.js can be customized to fit your settings: especially, the <code>constants-&gt;serverURL</code>. In the following example, we assume that a virtual host named &#39;vikm&#39; points to <code>&lt;path-to-vikm-root&gt;/vikm-backend/htdocs</code>.</p>
+
+<div><pre><code class="language-javascript">    ngconstant: {
+          // Options for all targets
+          options: {
+              space: &#39;  &#39;,
+              wrap: &#39;&quot;use strict&quot;;\n\n {%= __ngModule %}&#39;,
+              name: &#39;config&#39;,
+          },
+          // Environment targets
+          development: {
+              options: {
+                  dest: &#39;&lt;%= yeoman.app %&gt;/scripts/config.js&#39;
+              },
+              constants: {
+                  ENV: {
+                      serverURL: &#39;http://vikm/api/index.php/&#39;,
+                      withCredentials: true,
+                      debugInfoEnabled: true,
+                      CORS: true
+                  }
+              }
+          },
+          production: {
+              options: {
+                  dest: &#39;&lt;%= yeoman.app %&gt;/scripts/config.js&#39;
+              },
+              constants: {
+                  ENV: {
+                      serverURL: &#39;api/&#39;,
+                      withCredentials: false,
+                      debugInfoEnabled: false,
+                      CORS: false
+                  }
+              }
+          }
+    },</code></pre></div>
+
+<p>This part contains two important sections: <em>development</em> and <em>production</em>. Depending on whether the app is under development or deployed in production, different constants are set accordingly: </p>
+
+<ul>
+<li><em>serverURL:</em> the URL of the PHP backend. Must link to the api/index.php. </li>
+<li><em>withCredentials:</em> in development, two different web servers are used (the front-end is served on port 9000 and the backend on port 80). To allow Cross-Origin-Resource Sharing, this value must be set to <em>true</em>. In production mode, both front-end and back-end are served by the same web server, so set this constant to <em>false</em>.</li>
+<li><em>CORS</em>: same as for <em>withCredentials</em></li>
+<li><em>debugInfoEnabled:</em> internal constant to be used in development to log some messages on the console. We don&#39;t want those messages to appear in a production mode.</li>
+</ul>
+
+<blockquote>
+<p><strong><em>enabling bootstrap</em></strong></p>
+
+<p>Bootstrap is used as a layout framework
+By default, bower deploys the <em>.less</em> version, but it is easier to simply include the <em>.css</em> version. 
+To do so, edit: <code>&lt;path-to-vikm-root&gt;/vikmapp-ng/bower_components/bootstrap/bower.json</code>
+and replace <code>less/bootstrap.less</code> by <code>dist/css/bootstrap.css</code>.
+Optionaly, we can add <code>dist/css/bootstrap-theme.css</code>.</p>
+</blockquote>
+
+<p>The development environment can be started by running the following command in the vikmapp-ng directory. 
+<code>grunt serve</code>
+This should open Chrome at <code>http://localhost:9000/#/</code>. If not, open it manually.</p>
+
+<h3 id="toc_5">Customisation</h3>
+
+<ul>
+<li><p>To rename the instance of ViKM, edit the file <code>app/scripts/app.js</code> at line: 
+<code>.constant(&#39;siteTitle&#39;,{name: &#39;ViKM APP&#39;})</code>
+Replace ViKM APP with the new name.</p></li>
+<li><p>To replace the generic logo of ViKM with the logo of the project or platform, replace the image file: <code>app/images/icon_webapp.png</code>. The image must have a height of at least 32px.</p></li>
+<li><p>If the installation of ViKM must be monitored by Google Analytics, put the Google Analytics code in the corresponding section of the 
+<code>index.html</code> file.</p></li>
+</ul>
+
+<div><pre><code class="language-javascript">        &lt;!-- Google Analytics: change UA-XXXXX-X to be your site&#39;s ID --&gt;
+        &lt;script&gt;
+        (function(i,s,o,g,r,a,m){i[&#39;GoogleAnalyticsObject&#39;]=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,&#39;script&#39;,&#39;//www.google-analytics.com/analytics.js&#39;,&#39;ga&#39;);
+
+        ga(&#39;create&#39;, &#39;UA-XXXXX-X&#39;);
+        ga(&#39;send&#39;, &#39;page view&#39;);
+        &lt;/script&gt;</code></pre></div>
+
+<ul>
+<li>ViKM is using <a href="http://getbootstrap.com/">Bootstrap v3</a> as a layout framework. Several themes (free or commercial) exist to customise the appearance of the web application. </li>
+</ul>
+
+<h3 id="toc_6">Testing</h3>
+
+<p>The login interface should be displayed in the browser window:</p>
+
+<p><img src="https://gitlab.isb-sib.ch/wikmgroup/vikmapp-ng/raw/master/doc/images/login_page.png" alt="login page"></p>
+
+<p>By default, an <em>admin</em> account is created with:</p>
+
+<ul>
+<li>login: <em>admin</em></li>
+<li>password: <em>admin</em></li>
+</ul>
+
+<p>You should be able to log in and access the <code>News</code> section.</p>
+
+<p><img src="https://gitlab.isb-sib.ch/wikmgroup/vikmapp-ng/raw/master/doc/images/news_page.png" alt="news page"></p>
+
+<p>The default <code>admin</code> account must be edited; to do so, click on the <code>Admin User</code> link at the top right of the window. A form allows to modify the user details:</p>
+
+<p><img src="hhttps://gitlab.isb-sib.ch/wikmgroup/vikmapp-ng/raw/master/doc/images/user_page.png" alt="user page"></p>
+
+<h3 id="toc_7">Database Setup</h3>
+
+<p>By default, ViKM is configured with a single project. To use it as a multi-project (or work-package) system, new entries must be added to the projects table of the database. Use your favorite database managing software to edit the database schema (either SQLite or MySQL). Select the <code>projects</code> table and add new projects with their name, description and project leader (<code>user_id</code> = a reference to a registered user in the <code>users</code> table).</p>
+
+<p><img src="https://gitlab.isb-sib.ch/wikmgroup/vikmapp-ng/raw/master/doc/images/project.png" alt="project SQL"></p>
+
+<p>You must then add a new entry in the table <code>project_groups</code> to enable <code>group_id=1</code> to access to the new project.
+At the moment, no web interface is available to create or edit projects.
+By reloading the web page, a new navigation menu should be displayed at the top of the window, allowing to switch projects.</p>
+
+<p><img src="https://gitlab.isb-sib.ch/wikmgroup/vikmapp-ng/raw/master/doc/images/project_nav.png" alt="project navigation"></p>
+
+<p>Each user must be part of at least one group. Each group must be led by a registered and active user. The leader of a group will be responsible to activate new accounts linked to his group.
+The preferred method to start working with ViKM is to manually create user entries in the <code>users</code> SQL database:</p>
+
+<div><pre><code class="language-sql">INSERT INTO `users` ( `login`, `first name`, `last name`, `password`, `phone`, `email`, `is_admin`, `is_active`, `code`, `activation_code`, `is_password_reset`)
+VALUES
+    (&#39;jdoe&#39;, -- login name
+     &#39;John&#39;, -- firstname
+     &#39;Doe&#39;, -- lastname
+     NULL, -- empty password value
+     &#39;+41211234567&#39;, -- phone number
+     &#39;john.doe@email.com&#39;, -- email address
+     &#39;Y&#39;, -- is active
+     &#39;N&#39;, -- is admin
+     &#39;tg333xRsmg0pC1&#39;, -- random string for API code
+     &#39;555Zh09nXWgmOJ&#39;, -- temporary password
+     &#39;Y&#39; -- enable use of temporary password
+    );</code></pre></div>
+
+<p><em>Note: once setup, user jdoe can login with the temporary password. ViKM will prompt to setup a permanent password.</em></p>
+
+<p>Then, a group must be created. Set <code>leader_id</code>= <code>user_id</code> assigned to user <code>jdoe</code>. 
+Future members of the group of John Doe will be able to register with the web interface and assign themselves to the correct group. John Doe will be notified by email and will be responsible to activate or reject the new account.</p>
+
+<h2 id="toc_8">Deployment</h2>
+
+<p>To deploy the ViKM instance on a production server, <code>grunt</code> is used to package the front-end and minify its code. 
+In the web application root directory, launch the command:</p>
+
+<div><pre><code class="language-bash">grunt build;</code></pre></div>
+
+<p>The result of this command is available in the <code>dist</code> folder of the web application. Copy the content of this folder in the <code>htdocs</code> directory of the production server. Copy (or clone) there as well the back-end part of the ViKM application.</p>
+
+<h2 id="toc_9">Uploading documents and data</h2>
+
+<p>Each member of a project can create a dataset for that project. A dataset can contain different types of data and documents e.g. Excel, Word, PDF, Powerpoint. To browse available datasets, go to the Datasets tab and click on an existing Dataset.</p>
+
+<p>To create a new dataset, click on ‘NEW DATASET’ and fill out the information to describe the dataset as shown below. The permission for the uploaded data can be set. For example, different levels of permission can be set for the group and for other members of the project. This enables to upload preliminary data that must only be shared within the user own group, before sharing with the rest of the project.</p>
+
+<p><img src="https://gitlab.isb-sib.ch/wikmgroup/vikmapp-ng/raw/master/doc/images/new_dataset.png" alt="dataset"></p>
+
+<p>If a file is set to be ‘<em>only be downloadable on request and acceptance by the file owner</em>’, this means that, when someone in the same project tries to download the file, an email will be sent to the data owner asking to grant permission to access the file. This is a mechanism to ensure that the data owner is aware of where the uploaded data  are being used and that the data owner is in direct contact with the person who wishes to use the data.</p>
+
+<h2 id="toc_10">File preview</h2>
+
+<p>ViKM has a functionality to preview the file content without the need to download the file. The supported file types are: images, text, csv and Excel files. The preview opens in a modal upon clicking on the &#39;<em>preview</em>&#39; button in the dataset file list table.</p>
+
+<p><img src="https://gitlab.isb-sib.ch/wikmgroup/vikmapp-ng/raw/master/doc/images/file_preview.png" alt="file preview"></p>
+
+<h1 id="toc_11">Data visualization module</h1>
+
+<h2 id="toc_12">vikmGroupedBarplot</h2>
+
+<p>VikmGroupedBarplot is an AngularJS component to represent experimental data with a grouped barplot. This enables the comparison of different sub-groups of the population (for example, control vs treated) across different conditions or time points. Each bar represents the mean of all values of a sub-group of one condition. Clicking on the <code>&#39;display values&#39; button</code> will display individual measurements. The numeric value is displayed by positioning the cursor over a point. The figure can be downloaded as a PNG image by clicking on the <code>&#39;download&#39; button</code>.  </p>
+
+<h3 id="toc_13">Installation</h3>
+
+<blockquote>
+<p>_Prerequisite: 
+- <a href="https://lodash.com/">lodash</a> should be installed. You can install it with bower <code>bower install lodash --save</code> 
+- <a href="https://d3js.org">d3js V3</a> should be installed. Only compatible with version 3 (<code>&lt;script src=&quot;https://d3js.org/d3.v3.min.js&quot;&gt;&lt;/script&gt;</code>). Not yet with the latest version 4.</p>
+</blockquote>
+
+<p>The SIB GitLab repository of the ViKM Visualization module is: <code>git@gitlab.isb-sib.ch:wikmgroup/vikm-Visualization.git</code></p>
+
+<p>To use vikmGroupedBarplot, you need to add Vikm_Visualization module in your app.js file.</p>
+
+<div><pre><code class="language-javascript">angular.module(&#39;myApp&#39;, [&#39;Vikm_Visualization&#39;])</code></pre></div>
+
+<p>and create the <code>vikm-grouped-barplot</code> component on a <code>&lt;div&gt;</code> on your html.</p>
+
+<div><pre><code class="language-markup">&lt;div vikm-grouped-barplot data=&#39;data&#39;&gt;&lt;/div&gt;
+
+&lt;div vikm-grouped-barplot data=&#39;data&#39; height=&#39;500&#39; point=&#39;true&#39; ylabel=&#39;&quot;Normalized counts&quot;&#39; maxrange=&#39;300&#39; usenull=&#39;false&#39;&gt;&lt;/div&gt;</code></pre></div>
+
+<h3 id="toc_14">Parameters</h3>
+
+<ul>
+<li><strong>data</strong> - object containing the data to display. Values must be of type number. If values are not numbers, they just are ignored.</li>
+<li><strong>height</strong> - <em>optional</em> (<em>400px</em> by default)</li>
+<li><strong>point</strong> - <em>optional</em> (true/false, <em>true</em> by default) - to display individual values </li>
+<li><strong>ylabel</strong> - <em>optional</em> - label for Y axis.</li>
+<li><strong>maxrange</strong> - <em>optional</em> - maximum of Y axis (useful if to compare several graphs with same Y scale).</li>
+<li><strong>usenull</strong> - <em>optional</em> (true/false, <em>false</em> by default) - if data contains values = 0, these values are ignored for the mean calculation of the barplot. If you set keepnull to true, 0 values will be used to compute mean.</li>
+<li><strong>simple</strong> - <em>optional</em> If present, a minimal plot is produced, without any title, label and buttons.</li>
+</ul>
+
+<h3 id="toc_15">Data example</h3>
+
+<p>The data file is a json-based format, with a title, a description and an array of all categories (<code>x</code>). Each category has a <code>name</code> attribute and a <code>cat</code> array containing the subgroups of this category. Each sub-group has a <code>name</code> attribute and a <code>values</code> array containing all the numerical values.</p>
+
+<div><pre><code class="language-javascript">{
+    &quot;title&quot;:&quot;Title of barplot&quot;,
+    &quot;description&quot;:&quot;description of barplot&quot;,
+        &quot;x&quot;:[
+            {&quot;name&quot;:&quot;x1&quot;,
+                &quot;cat&quot;:[
+                    {&quot;name&quot;:&quot;A&quot;,&quot;values&quot;:[16.7069]},
+                    {&quot;name&quot;:&quot;B&quot;,&quot;values&quot;:[10.7069]},
+                    {&quot;name&quot;:&quot;C&quot;,&quot;values&quot;:[1]},
+                    {&quot;name&quot;:&quot;D&quot;,&quot;values&quot;:[31.068,0]}
+                ]
+            },
+            {&quot;name&quot;:&quot;x2&quot;,
+                &quot;cat&quot;:[
+                    {&quot;name&quot;:&quot;A&quot;,&quot;values&quot;:[10.5769,10.368,0.8526]},
+                    {&quot;name&quot;:&quot;B&quot;,&quot;values&quot;:[20.5769,10.368,0.8526]},
+                    {&quot;name&quot;:&quot;C&quot;,&quot;values&quot;:[27.4099,40.7495]}
+                ]
+            },
+            {&quot;name&quot;:&quot;x3&quot;,
+                &quot;cat&quot;:[
+                    {&quot;name&quot;:&quot;A&quot;,&quot;values&quot;:[&quot;N/A&quot;]},
+                    {&quot;name&quot;:&quot;B&quot;,&quot;values&quot;:[20.4099,36.7495]},
+                    {&quot;name&quot;:&quot;C&quot;,&quot;values&quot;:[23.4099,30.7495]}
+
+                ]
+            }
+        ]
+}
+</code></pre></div>
+
+<h3 id="toc_16">Example</h3>
+
+<p><img src="https://gitlab.isb-sib.ch/wikmgroup/vikmapp-ng/raw/master/doc/images/grouped_barplot.png" alt="melanomX">
+<img src="https://gitlab.isb-sib.ch/wikmgroup/vikmapp-ng/raw/master/doc/images/grouped_barplot_points.png" alt="melanomX">
+<img src="https://gitlab.isb-sib.ch/wikmgroup/vikmapp-ng/raw/master/doc/images/grouped_barplot_concrete_example.png" alt="melanomX">
+An example implementation is available in the GIT repository.</p>
+
+<h1 id="toc_17">[NEW] Linking ViKM with R using RServe</h1>
+
+<p>To enable the linking of the web interface with an R session, ViKM uses Rserve (<a href="https://rforge.net/Rserve/">https://rforge.net/Rserve/</a>) with FastRWeb (<a href="https://rforge.net/FastRWeb/">https://rforge.net/FastRWeb/</a>). Rserve must be started in daemon mode on the server and each connection from the web server will fork the Rserve process. In order to persist the connection between the web server and the Rserve instance, an intermediate socket manager (socketeer) must be set up.</p>
+
+<blockquote>
+<p><em>Prerequisite installation of R packages</em></p>
+
+<ul>
+<li>Rserve (<a href="https://rforge.net/Rserve/">https://rforge.net/Rserve/</a>)</li>
+<li>FastRWeb (<a href="https://rforge.net/FastRWeb/">https://rforge.net/FastRWeb/</a>)</li>
+<li>jsonlite (<a href="https://cran.r-project.org/package=jsonlite">https://cran.r-project.org/package=jsonlite</a>) </li>
+</ul>
+</blockquote>
+
+<p>The SIB GitLab repository of the ViKM-rserve is:
+<code>git@gitlab.isb-sib.ch:wikmgroup/vikm-rserve.git</code></p>
+
+<p>Clone this repository in <code>&lt;path-to-vikm-root&gt;</code>.</p>
+
+<div><pre><code class="language-bash">cd &lt;path-to-vikm-root&gt;;
+git clone git@gitlab.isb-sib.ch:wikmgroup/vikm-rserve.git;
+mkdir vikmapp-backend/tools/run;
+mkdir vikmapp-backend/log;
+mv vikm-rserve/socketeer.c vikmapp-backend/tools/;
+mv vikm-rserve/FastRWeb_config.php vikmapp-backend/conf/;
+mv vikm-rserve/FastRWeb* vikmapp-backend/tools/;</code></pre></div>
+
+<p>Before compiling the <code>socketeer.c</code> file two paths must be edited:</p>
+
+<div><pre><code class="language-none">#define RSERVE_SOCK &quot;&lt;path-to-vikm-root&gt;/vikmapp-backend/
+tools/run/Rserve.sock&quot;</code></pre></div>
+
+<div><pre><code class="language-none">#define LOG_NAME &quot;&lt;path-to-vikm-root&gt;/vikmapp-backend/log/socketeer.log&quot;</code></pre></div>
+
+<p>Compile the socketeer.c file 
+<code>gcc -O3 -Wall -o socketeer socketeer.c</code></p>
+
+<p>Edit <code>&lt;path-to-vikm-root&gt;/vikmapp-backend/tools/FastRWeb/code/rserve.conf</code> to set the correct path:</p>
+
+<div><pre><code class="language-bash">socket &lt;path-to-vikm-root&gt;/vikmapp-backend/tools/run/Rserve.sock
+source &lt;path-to-vikm-root&gt;/vikmapp-backend/tools/FastRWeb/code/rserve.R</code></pre></div>
+
+<p>Edit <code>&lt;path-to-vikm-root&gt;/vikmapp-backend/tools/FastRWeb/code/start</code></p>
+
+<div><pre><code class="language-bash">ROOT=&lt;path-to-vikm-root&gt;/vikmapp-backend/tools/FastRWeb</code></pre></div>
+
+<p>To ease the call to Rserve from the web server, it is recommended to add an Alias to the <code>R.php</code> file in your virtual host configuration:</p>
+
+<div><pre><code class="language-bash">&lt;VirtualHost *:80&gt;
+    ServerAdmin email@domain.com
+    DocumentRoot &lt;path-to-vikm-root&gt;/vikmapp-backend/htdocs/
+    ServerName vikm
+    ErrorLog &lt;path-to-vikm-root&gt;/vikmapp-backend/log/vikm-error_log
+    CustomLog &lt;path-to-vikm-root&gt;/vikmapp-backend/log/vikm-access-log common
+    
+    Alias /R &quot;&lt;path-to-vikm-root&gt;/vikmapp-backend/tools/
+    
+    FastRWebPHP/R.php&quot;
+    &lt;Directory &quot;&lt;path-to-vikm-root&gt;/vikmapp-backend/&quot;&gt;
+           AllowOverride All
+           Order allow,deny
+           Allow from all
+    &lt;/Directory&gt;
+&lt;/VirtualHost&gt;</code></pre></div>
+
+<p>Restart the web server in order to apply the modifications to its configuration.</p>
+
+<p>To start RServe:</p>
+
+<div><pre><code class="language-bash">cd  &lt;path-to-vikm-root&gt;/vikmapp-backend/tools/FastRWeb/code;
+./start;</code></pre></div>
+
+<h2 id="toc_18">Rserve demo</h2>
+
+<p>A minimal example of ViKM integration with R is available in the <code>demo</code> directory:</p>
+
+<ul>
+<li><strong>rserve-service.js</strong>: an Angular service to interact with RServe through socketeer and R.php.</li>
+<li><strong>rserve-directive.js</strong>: an Angular directive to integrate in an Angular view to display the data generated by R.</li>
+</ul>
+
+<p><strong>Setup:</strong></p>
+
+<div><pre><code class="language-bash">cp &lt;path-to-vikm-root&gt;/vikm-rserve/demo/rserve-service.js\
+ &lt;path-to-vikm-root&gt;/vikmapp-ng/app/scripts/services/;
+cp &lt;path-to-vikm-root&gt;/vikm-rserve/demo/rserve-directive.js\
+ &lt;path-to-vikm-root&gt;/vikmapp-ng/app/scripts/directives/;</code></pre></div>
+
+<p>edit <code>&lt;path-to-vikm-root&gt;/vikmapp-ng/app/index.html</code> and add:</p>
+
+<div><pre><code class="language-markup">&lt;script src=&quot;scripts/services/rserve-service.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;scripts/directive/rserve-directive.js&quot;&gt;&lt;/script&gt;</code></pre></div>
+
+<p>Using the web interface, upload the file <code>demo/Rdemo.RData</code> to the dataset named <code>test</code>;</p>
+
+<p>edit the file: <code>&lt;path-to-vikm-root&gt;/vikm-ng/app/views/dataset/view.html</code> and add the angular directive <code>&lt;rserve-directive&gt;</code> at the bottom of the page:</p>
+
+<div><pre><code class="language-markup">&lt;rserve-demo 
+    filepath=&#39;&quot;project_&quot;+vm.dataset.project_id+
+    &quot;/dataset_&quot;+vm.dataset.dataset_id+&quot;/Rdemo.RData&quot;&#39;&gt;
+&lt;/rserve-demo&gt;</code></pre></div>
+
+<p>To run the example, navigate to the <em>test</em> dataset page and click on the <code>get data</code> button. This will register a new socket with socketeer, call the <code>load_data.R</code> script to load the <code>Rdemo.RData</code> file, which contain a single dataframe (expData) and call the <code>Rdemo.R</code> script with the number of rows to retrieve as argument.</p>
+
+<p>The sequence of requests from Angular to the back-end is listed in the figure below:</p>
+
+<p><img src="https://gitlab.isb-sib.ch/wikmgroup/vikmapp-ng/raw/master/doc/images/rserve.png" alt="rserve"></p>
+
+<ol>
+<li>The first request is for <code>newskt</code>: this gets a unique socket ID (6159753270272802) in this case. Any following request must use this ID. </li>
+<li>The second request, <code>load_data</code> tells Rserve to load the file <code>project_1/dataset_4/Rdemo.RData</code>. The PHP script R.php checks whether the corrent user is allowed to access this file. </li>
+<li>The third request <code>Rdemo</code> simply gets the content of the <code>expData</code> R dataframe as json.</li>
+</ol>
+
+<p>To add a new R script (<code>my_script.R</code>), place it in the <code>&lt;path-to-vikm-root&gt;/vikm-backend/tools/FastRWeb/web.R</code> directory. The skeleton of the file must be: </p>
+
+<div><pre><code class="language-r">run &lt;- function(param1,param2,...) {
+    oclear();
+    
+    # do something clever here 
+    
+    out(json_result):
+    done():
+}</code></pre></div>
+
+<p><code>json_result</code> is a JSON formatted variable, generally created with the <code>toJSON()</code> function of the <code>jsonlite</code> R package.</p>
+
+<p>To call the script from the front-end, the link syntax is <code>http://vikm/R/&lt;socketID&gt;/my_script</code>.</p>
+
+<p>More information on FastRWeb is available here: <a href="https://rforge.net/FastRWeb/">https://rforge.net/FastRWeb/</a></p>
+
+<h1 id="toc_19">Examples of Installed Instances</h1>
+
+<p>ViKM serves as a base system to store, manage and control access to data grouped into datasets and projects. Thanks to the use of the <code>AngularJS</code> framework, it is highly modular and can be complemented with specific modules. Those could be devoted to display and navigate through tabular data or display interactive graphs or combine both. Some examples are highlighted in the following screenshots:</p>
+
+<h2 id="toc_20">Infused: <a href="http://infused.vital-it.ch">http://infused.vital-it.ch</a> - <a href="http://dx.doi.org/10.1038%2Fsrep26822">publication</a></h2>
+
+<p><img src="https://gitlab.isb-sib.ch/wikmgroup/vikmapp-ng/raw/master/doc/images/infused.png" alt="infused"></p>
+
+<h2 id="toc_21">OncoBench: a LIMS and Variant Annotation Pipeline for the HUG</h2>
+
+<p><img src="https://gitlab.isb-sib.ch/wikmgroup/vikmapp-ng/raw/master/doc/images/oncobench1.png" alt="oncobench1"></p>
+
+<p><img src="https://gitlab.isb-sib.ch/wikmgroup/vikmapp-ng/raw/master/doc/images/oncobench2.png" alt="oncobench2"></p>
+
+<h2 id="toc_22">MelanomX: a SystemsX.ch project. ViKM is linked to a NGS LiMS at the UNIL.</h2>
+
+<p><img src="https://gitlab.isb-sib.ch/wikmgroup/vikmapp-ng/raw/master/doc/images/melanomx.png" alt="melanomX"></p>
+
+<h1 id="toc_23">Licence</h1>
+
+<p><em>This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</em>
+<em>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more details.</em>
+<em>You should have received a copy of the GNU General Public License along with this program.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</em></p>
+
+
+
+
+</body>
+
+</html>

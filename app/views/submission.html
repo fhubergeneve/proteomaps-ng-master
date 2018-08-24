@@ -1,0 +1,261 @@
+<!--
+/************************ LICENCE ***************************
+*     This file is part of <ViKM Vital-IT Knowledge Management web application>
+*     Copyright (C) <2016> SIB Swiss Institute of Bioinformatics
+*
+*     This program is free software: you can redistribute it and/or modify
+*     it under the terms of the GNU Affero General Public License as
+*     published by the Free Software Foundation, either version 3 of the
+*     License, or (at your option) any later version.
+*
+*     This program is distributed in the hope that it will be useful,
+*     but WITHOUT ANY WARRANTY; without even the implied warranty of
+*     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*     GNU Affero General Public License for more details.
+*
+*     You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>
+*
+*****************************************************************/
+-->
+
+<div class = 'container'>
+	<div class="text-center">
+			<h2>Submit your data to {{vm.siteTitle}}</h2>
+	</div>
+
+
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+			<div class = 'panel panel-default' style = 'margin-top: 50px;'>
+				<div class = 'panel-body'>
+					<form name="form" ng-submit="vm.sendToBackend()" role="form" novalidate class = 'form-horizontal' role = 'form'>
+						
+						<div class = 'form-group'>
+							<label class = 'control-label col-sm-3'>Tree file <span class="glyphicon glyphicon-info-sign info-help" aria-hidden="true" style="color:dodgerblue" data-toggle="modal" data-target="#treeHelpModal"></span></label>
+							<div class = 'col-sm-2' style = 'margin-top: 7px;'>
+								<input type="file" style="display:none;" id="treefile" name="treefile" ngf-select="vm.uploadTreeFile($file)"/>
+								<button type="button" class="btn btn-default btn-sm" ng-click="vm.clickBrowseTree()">Upload file</button></input>
+							</div>
+							<div class = 'col-sm-3' style = 'margin-top: 7px;'>
+								<select class="form-control input-sm" ng-model="selectedtree" ng-options="tree for tree in availabletrees" ng-change="LoadSelectedTree(selectedtree)"><option value="">Select existing</option></select>
+							</div>
+							<div class = 'col-sm-3' style = 'margin-top: 7px;'>
+								<span id="selected_filename">{{vm.selectedTreeFileName}}</span>
+							</div>
+						</div>
+
+						<div class = 'row'>
+							<label class = 'control-label col-sm-3'>Data file <span class="glyphicon glyphicon-info-sign info-help" aria-hidden="true" style="color:dodgerblue" data-toggle="modal" data-target="#DataHelpModal"></span></label>
+							<div class = 'col-sm-5' style = 'margin-top: 7px;'>
+								<!--	<input type="file" id="datafile" name="datafile" ngf-select="vm.uploadFile($file)" /> -->
+								<input type="file" style="display:none;" id="datafile" name="datafile" ngf-select="vm.uploadDataFile($file)"/>
+								<button type="button" class="btn btn-default btn-sm" ng-click="vm.clickBrowseData()">Upload file</button></input>
+							</div>
+							<div class = 'col-sm-3' style = 'margin-top: 7px;'>
+								<div style="margin-top: 7px;"><span id="selected_data_filename">{{vm.selectedDataFileName}}</span></div>
+							</div>
+						</div>
+
+
+						<div  style="margin-top: 10px" class = 'form-group input-group-sm' ng-class="{ 'has-error': form.nr_edges.$dirty && form.nr_edges.$error.required }">
+							<label style="margin-top: 7px" id="popoverData_nbedg" class = 'control-label col-sm-3' for="nr_edges" rel="popover" data-placement="left" data-original-title="Title" data-trigger="hover" data-html="true"
+							title="Number of Edges" 
+						   	data-content="The number of edges defines the shape of the plot.</br>4 leads to a square, 5 to a pentagone and so on...</br>Min: 4	Max: 100.</br>"
+							>Number of Edges
+							</label>
+							<div class = 'col-sm-2' style = 'margin-top: 10px;'><input type="number" name="nr_edges" id="nr_edges" class="form-control" min="4" step="1" ng-model="vm.nr_edges" required /></div>
+<!-- 							<div class = 'col-sm-6' style = 'margin-top: 7px;'><span ng-show="form.nr_motifs.$dirty && form.nr_motifs.$error.required" class="help-block">Number of Edges is required</span></div>
+ -->
+						</div>
+
+						<div  class = 'form-group input-group-sm' ng-class="{ 'has-error': form.nr_motifs.$dirty && form.nr_motifs.$error.required }">
+								<label id="popoverData_norm" class = 'control-label col-sm-3' for="normalization" rel="popover" data-placement="left" data-original-title="Title" data-trigger="hover" data-html="true"
+								title="Normalization" 
+							   	data-content="Normalization of Data between 0 and 1 </br>If normalization is not used, absolute value is set (Can not represent negative area)</br>"
+								>Normalization
+								</label>
+
+					            <div class="btn-group col-sm-3" data-toggle="buttons" style = 'margin-top: 7px;' name="normalization">
+					                <label class="btn btn-default btn-sm" ng-class="{active: vm.radiobuttons.normalization.currentVal == 'no'}" ng-click="setRadiobuttons('vm.radiobuttons.normalization', 'no')">
+					                    <input type="radio" value="no" ng-model="vm.radiobuttons.normalization.currentVal"></input>
+					                    No
+					                </label>
+					                <label class="btn btn-default btn-sm" ng-class="{active: vm.radiobuttons.normalization.currentVal == 'yes'}" ng-click="setRadiobuttons('vm.radiobuttons.normalization', 'yes')">
+					                    <input type="radio" value="yes" ng-model="vm.radiobuttons.normalization.currentVal"></input>
+					                    Yes
+					                </label>
+					            </div>
+					<!--                <p>Current Value: {{vm.radiobuttons.normalization.currentVal}}</p>
+					 -->
+
+
+							<label id="popoverData_norm" class = 'control-label col-sm-3' for="showunknownid" rel="popover" data-placement="left" data-original-title="Title" data-trigger="hover" data-html="true"
+								title="Show Unmapped" 
+							   	data-content="Choose if you want to show IDs that could not be mapped in the tree</br> If yes is selected, unmapped IDs will be placed in the 'Unknown ID' cell."
+								>Show Unmapped
+								</label>
+
+					            <div class="btn-group col-sm-3" data-toggle="buttons" style = 'margin-top: 7px;' name="show_unmapped">
+					                <label class="btn btn-default btn-sm" ng-class="{active: vm.radiobuttons.showunknown.currentVal == 'no'}" ng-click="setRadiobuttons('vm.radiobuttons.showunknown', 'no')">
+					                    <input type="radio" value="no" ng-model="vm.radiobuttons.showunknown.currentVal"></input>
+					                    No
+					                </label>
+					                <label class="btn btn-default btn-sm" ng-class="{active: vm.radiobuttons.showunknown.currentVal == 'yes'}" ng-click="setRadiobuttons('vm.radiobuttons.showunknown', 'yes')">
+					                    <input type="radio" value="yes" ng-model="vm.radiobuttons.showunknown.currentVal"></input>
+					                    Yes
+					                </label>
+					            </div>
+					<!--                <p>Current Value: {{vm.radiobuttons.showunknown.currentVal}}</p>
+					 -->
+
+						<center><input class="btn btn-default btn-xs" type="button" style = 'margin-top: 5%;' onclick="ShowMore()" value="More Parameters" id="moreparameters"></input></center></br>
+						<div id="ExpertParameters">
+
+							<div  class = 'form-group input-group-sm' ng-class="{ 'has-error': form.Error_Threshold.$dirty && form.Error_Threshold.$error.required }">
+
+								<label id="popoverData_ethreshold" class = 'control-label col-sm-3' for="EThreshold" rel="popover" data-placement="left" data-original-title="Title" data-trigger="hover" data-html="true"
+								title="Error Threshold" 
+						   		data-content="Error Threshold is the maximal error value.</br>Error Threshold is used for convergence of polygon size to the value given as input.</br>The overall error of polygons area within a layer has to be smaller than the Error Threshold.</br>If overall error is bigger, the alternative (exact) algorithm is used for this layer.</br>"
+								>Error Threshold
+								</label>
+								<div class = 'col-sm-2'><input type="number" name="EThreshold" id="EThreshold" class="form-control" min="0.001" step="0.001" ng-model="vm.ethreshold" required /></div>
+								<div class = 'col-sm-1'><span ng-show="form.EThreshold.$dirty && form.EThreshold.$error.required" class="help-block">Error Threshold is required</span></div>
+
+								<label id="popoverData_ExactMax" class = 'control-label col-sm-3' for="Exact_Max" rel="popover" data-placement="left" data-original-title="Title" data-trigger="hover" data-html="true"
+								title="Exact Max" 
+						   		data-content="Sets the maximum number of cells, within a parental cell, for alternative exact algorithm.</br>Only used when Ethreshold is not reached (i.e. when ususal algorithm does not converge)."
+								>Exact Max
+								</label>
+								<div class = 'col-sm-2'><input type="number" name="Exact_Max" id="Exact_Max" class="form-control" min="0" step="1" ng-model="vm.exactmax" required /></div>
+								<div class = 'col-sm-1'><span ng-show="form.Exact_Max.$dirty && form.Exact_Max.$error.required" class="help-block">Exact Max is required</span></div>
+
+							</div>
+
+
+							<div  class = 'form-group input-group-sm' ng-class="{ 'has-error': form.Error_Threshold.$dirty && form.Error_Threshold.$error.required }">
+
+								<label id="popoverData_epsilon" class = 'control-label col-sm-3' for="Epsilon" rel="popover" data-placement="left" data-original-title="Title" data-trigger="hover" data-html="true"
+								title="Epsilon" 
+						   		data-content="Epsilon is the minimum value for fadapt.</br>Corresponds to the smallest polygon size.</br> Is also used for projection of open polygons edges on parental cell edges"
+								>Epsilon
+								</label>
+								<div class = 'col-sm-2'><input type="number" name="Epsilon" id="Epsilon" class="form-control" min="0.000000000001" step="0.000000000001" ng-model="vm.epsilon" required /></div>
+								<div class = 'col-sm-1'><span ng-show="form.Epsilon.$dirty && form.Epsilon.$error.required" class="help-block">Epsilon is required</span></div>
+							</div>
+
+	                        <div  class = 'form-group input-group-sm'>
+	                            <label class = 'control-label col-sm-3' for="use-trash">Trash</label>
+	                            <div class = 'col-sm-2'>
+	                                <input type="checkbox" id="use-trash" ng-model="vm.use_trash" ng-change="vm.changeUseTrash()">
+	                            </div>
+	                        </div>
+	                    </div>
+
+						<div class = 'form-actions col-sm-9 col-sm-offset-3'>
+							<button type="submit" ng-disabled="form.$invalid || !(vm.treefileData && vm.datafileData)" class="btn btn-primary">Submit</button>
+						</div>
+
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="treeHelpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="TreeModalLabel">Tree file format</h4>
+			</div>
+			<div class="modal-body">
+				Tree file columns are tab separated. Please make sure that all columns are filled.</br>
+				The ID field has to be unique. ID and Parent ID fields are mendatory.</br>
+				1. ID  |  2. Parent ID  |  3. Name  |  4. Abbreviation  |  5. Description
+				<pre>
+0	ROOT	ROOT	.	.
+A	0	a	Abb a	first letter of alphabet
+B	A	b	Abb b	second letter of alphabet
+C	A	c	Abb c	third letter of alphabet
+D	B	d	Abb d	fourth letter of alphabet
+E	B	e	Abb e	fifth letter of alphabet
+F	B	f	Abb f	sixth letter of alphabet
+G	C	g	Abb g	seventh letter of alphabet
+H	C	h	Abb h	eighth letter of alphabet
+I	D	i	Abb i	ninth letter of alphabet
+J	D	j	Abb j	tenth letter of alphabet
+K	E	k	Abb k	eleventh letter of alphabet
+L	E	l	Abb l	twelfth letter of alphabet
+M	E	m	Abb m	thirteenth letter of alphabet
+N	F	n	Abb n	fourteenth letter of alphabet
+O	G	o	Abb o	fifteenth letter of alphabet
+P	G	p	Abb p	sixteenth letter of alphabet
+Q	H	q	Abb q	seventeenth letter of alphabet
+R	H	r	Abb r	eighteenth letter of alphabet
+S	H	s	Abb s	nineteenth letter of alphabet
+T	H	t	Abb t	twentieth letter of alphabet
+
+				</pre>
+
+				You can download a sample tree file or make a submission using this sample tree.
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" ng-click="vm.downloadSampleTree()" ><span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download sample tree</button>
+				<button type="button" class="btn btn-primary" ng-click="vm.submitSampleTree()" data-dismiss="modal"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload tree test file</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="DataHelpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="DataModalLabel">Tree file format</h4>
+			</div>
+			<div class="modal-body">
+				Data file columns are tab separated. Please make sure that all columns are filled.</br>
+				Header is mendatory</br>
+				Header:</br> ID    | Name of 1st dataset | Name of 2nd dataset | ... | Name of nth dataset</br>
+				Core:</br>   ID#   | Value of ID# in 1st dset |   Value of ID# in 2nd dset | ... | Value of ID# in nth dset</br>
+				<pre>
+
+ID	test1	test2	test3
+I	-1.1	1.1	1.155
+J	-2.2	2.20	5.200
+K	-3.3	3.30	6.300
+L	4.4	4.40	400.1
+M	5.5	5.50	500.5
+N	6.6	6.60	6000.345670
+O	7.7	7.70	7.700
+P	-8.8	8.80	80.560
+Q	-9.9	9.90	99.00
+R	-10.10	10.1	1000
+S	11.11	11.110	123.1100
+T	12.12	12.120	1200.123456789
+				</pre>
+
+				You can download a sample data file or make a submission using this sample data.
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" ng-click="vm.downloadSampleData()" ><span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download sample data</button>
+				<button type="button" class="btn btn-primary" ng-click="vm.submitSampleData()" data-dismiss="modal"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload data test file</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<script type="text/javascript"> 
+	document.getElementById("ExpertParameters").style.display = "none"; 
+	$('[id^=popoverData_]').popover();
+</script>

@@ -1,0 +1,191 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+
+
+
+/* Space out content a bit */
+body {
+  padding-top: 70px;
+  padding-bottom: 70px;
+  margin-bottom: 60px;
+  margin-top: 30px;
+  background: white;
+}
+
+.pointer{
+	cursor: pointer;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+  border-bottom: 1px solid #e5e5e5;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
+}
+
+/* Custom page footer */
+.footer {
+/*  padding-top: 19px;*/
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+/*  background-color: #f5f5f5;*/
+}
+.strong, .bold{
+	font-weight: bold;
+}
+
+
+
+
+/* Customize container */
+@media (min-width: 768px) {
+  .container {
+/*    max-width: 730px;*/
+      width: 100%;
+  }
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+
+
+/* SMART TABLE CSS */
+.st-sort-ascent:before{
+  content: '\25B2';
+}
+
+.st-sort-descent:before{
+  content: '\25BC';
+}
+/* END smart table */
+
+/* FILE UPLOAD */
+.my-drop-zone { border: dotted 3px lightgray; }
+.nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+/* END FILE UPLOAD */
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: black;
+}
+
+.popoverurl{
+    font-size: 9px;
+}
+
+.viewdatatr .popover-inner{
+	overflow: hidden;
+}
+
+.dl-publication > dt{
+	margin-top:6px;
+	width:80px;
+}
+.dl-publication > dd{
+	margin-bottom:10px;
+	margin-left:90px;
+}
+
+.pointer{
+	cursor:pointer;
+}
+
+.publications > p{
+	margin:0;
+}
+
+.wait{
+	opacity:0.7;
+	cursor:not-allowed;
+}
+
+.toast {
+    opacity: 1 !important;
+}
+
+.ui-select{
+	margin-top:5px;
+	min-height:30px;
+}
+
+.info-help {
+    cursor: pointer;
+}
+
+#use-trash {
+    margin-top:13px;
+}
+
+.x-mer-tab {
+    cursor: pointer;
+}
+
+.logo-info-text {
+    text-align: center;
+}
